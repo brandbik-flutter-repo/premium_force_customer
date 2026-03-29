@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:premium_force_main/l10n/app_localizations.dart';
+import 'package:premium_force_main/common_widgets/premiumloader.dart';
 
 class Premuimfleetcard extends StatelessWidget {
   const Premuimfleetcard({
@@ -11,12 +12,14 @@ class Premuimfleetcard extends StatelessWidget {
     required this.name,
     required this.passengerCount,
     required this.brand,
+    this.brandLogoUrl,
   });
 
   final String image;
   final String name;
   final String passengerCount;
   final String brand;
+  final String? brandLogoUrl;
 
   bool _isDarkLogo(String brandName) {
     final lowerBrand = brandName.toLowerCase();
@@ -52,12 +55,42 @@ class Premuimfleetcard extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             // Base image
-            CachedNetworkImage(
-              imageUrl: imageProvider,
-              fit: BoxFit.cover,
-              width: 240,
-              height: 160,
-            ),
+            imageProvider.isEmpty
+                ? Container(
+                    color: Colors.grey[800],
+                    child: Center(
+                      child: Icon(
+                        Icons.directions_car,
+                        color: Colors.grey[600],
+                        size: 60,
+                      ),
+                    ),
+                  )
+                : CachedNetworkImage(
+                    imageUrl: imageProvider,
+                    fit: BoxFit.cover,
+                    width: 240,
+                    height: 160,
+                    placeholder: (context, url) => Container(
+                      color: Colors.grey[800],
+                      child: Center(
+                        child: PremiumLoader(
+                          size: 24,
+                          color: Colors.grey[600]!,
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      color: Colors.grey[800],
+                      child: Center(
+                        child: Icon(
+                          Icons.image_not_supported,
+                          color: Colors.grey[600],
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                  ),
 
             // Bottom frosted-glass info overlay
             Positioned(
@@ -71,21 +104,32 @@ class Premuimfleetcard extends StatelessWidget {
                   children: [
                     // Blurred copy of the same image, aligned to match the
                     // position it would occupy behind this region.
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      height: 160,
-                      child: ImageFiltered(
-                        imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                        child: CachedNetworkImage(
-                          imageUrl: imageProvider,
-                          fit: BoxFit.cover,
-                          width: 240,
-                          height: 160,
-                        ),
-                      ),
-                    ),
+                    imageProvider.isNotEmpty
+                        ? Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            height: 160,
+                            child: ImageFiltered(
+                              imageFilter: ImageFilter.blur(
+                                sigmaX: 5,
+                                sigmaY: 5,
+                              ),
+                              child: CachedNetworkImage(
+                                imageUrl: imageProvider,
+                                fit: BoxFit.cover,
+                                width: 240,
+                                height: 160,
+                              ),
+                            ),
+                          )
+                        : Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            height: 160,
+                            child: Container(color: Colors.grey[800]),
+                          ),
                     // Tinted overlay
                     Container(
                       decoration: BoxDecoration(
@@ -145,7 +189,8 @@ class Premuimfleetcard extends StatelessWidget {
             // BackdropFilter so it is scroll-safe.
             Positioned(
               top: 5,
-              right: 5,
+              right: Directionality.of(context) == TextDirection.ltr ? 5 : null,
+              left: Directionality.of(context) == TextDirection.rtl ? 5 : null,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: SizedBox(
@@ -155,21 +200,50 @@ class Premuimfleetcard extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       // Blurred image slice behind the badge
-                      Positioned(
-                        top: -5,
-                        right: -5,
-                        width: 240,
-                        height: 160,
-                        child: ImageFiltered(
-                          imageFilter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                          child: CachedNetworkImage(
-                            imageUrl: imageProvider,
-                            fit: BoxFit.cover,
-                            width: 240,
-                            height: 160,
-                          ),
-                        ),
-                      ),
+                      imageProvider.isNotEmpty
+                          ? Positioned(
+                              top: -5,
+                              right:
+                                  Directionality.of(context) ==
+                                      TextDirection.rtl
+                                  ? -5
+                                  : null,
+                              left:
+                                  Directionality.of(context) ==
+                                      TextDirection.ltr
+                                  ? -5
+                                  : null,
+                              width: 240,
+                              height: 160,
+                              child: ImageFiltered(
+                                imageFilter: ImageFilter.blur(
+                                  sigmaX: 20,
+                                  sigmaY: 20,
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: imageProvider,
+                                  fit: BoxFit.cover,
+                                  width: 240,
+                                  height: 160,
+                                ),
+                              ),
+                            )
+                          : Positioned(
+                              top: -5,
+                              right:
+                                  Directionality.of(context) ==
+                                      TextDirection.rtl
+                                  ? -5
+                                  : null,
+                              left:
+                                  Directionality.of(context) ==
+                                      TextDirection.ltr
+                                  ? -5
+                                  : null,
+                              width: 240,
+                              height: 160,
+                              child: Container(color: Colors.grey[700]),
+                            ),
                       Container(
                         decoration: BoxDecoration(
                           color: _isDarkLogo(brand)
@@ -177,11 +251,50 @@ class Premuimfleetcard extends StatelessWidget {
                               : Colors.black.withAlpha(128),
                         ),
                         padding: const EdgeInsets.all(4.0),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              "https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/${brand.toLowerCase()}.png",
-                          fit: BoxFit.contain,
-                        ),
+                        child: brandLogoUrl != null
+                            ? CachedNetworkImage(
+                                imageUrl: brandLogoUrl!,
+                                fit: BoxFit.contain,
+                                placeholder: (context, url) => Center(
+                                  child: PremiumLoader(
+                                    size: 24,
+                                    color: Colors.amber,
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) => Center(
+                                  child: Icon(
+                                    Icons.directions_car,
+                                    color: Colors.grey,
+                                    size: 24,
+                                  ),
+                                ),
+                              )
+                            : brand.toLowerCase() == 'unknown'
+                            ? Center(
+                                child: Icon(
+                                  Icons.directions_car,
+                                  color: Colors.grey,
+                                  size: 24,
+                                ),
+                              )
+                            : CachedNetworkImage(
+                                imageUrl:
+                                    "https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/${brand.toLowerCase()}.png",
+                                fit: BoxFit.contain,
+                                placeholder: (context, url) => Center(
+                                  child: PremiumLoader(
+                                    size: 24,
+                                    color: Colors.amber,
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) => Center(
+                                  child: Icon(
+                                    Icons.directions_car,
+                                    color: Colors.grey,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
                       ),
                     ],
                   ),

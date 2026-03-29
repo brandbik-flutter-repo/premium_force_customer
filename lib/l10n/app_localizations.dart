@@ -170,6 +170,66 @@ abstract class AppLocalizations {
   /// **'Recent Bookings'**
   String get recentBookings;
 
+  /// No description provided for @bookingInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Info'**
+  String get bookingInfo;
+
+  /// No description provided for @bookingCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Category'**
+  String get bookingCategory;
+
+  /// No description provided for @brand.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand'**
+  String get brand;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// No description provided for @duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get duration;
+
+  /// No description provided for @from.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get from;
+
+  /// No description provided for @to.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get to;
+
+  /// No description provided for @pricing.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing'**
+  String get pricing;
+
+  /// No description provided for @paymentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Status'**
+  String get paymentStatus;
+
   /// No description provided for @premiumFleet.
   ///
   /// In en, this message translates to:
@@ -194,11 +254,47 @@ abstract class AppLocalizations {
   /// **'Airport Departure'**
   String get airportDeparture;
 
+  /// No description provided for @goToBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to booking'**
+  String get goToBooking;
+
+  /// No description provided for @backToHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to home'**
+  String get backToHome;
+
   /// No description provided for @chauffeurService.
   ///
   /// In en, this message translates to:
   /// **'Chauffeur Service'**
   String get chauffeurService;
+
+  /// No description provided for @serviceDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Duration'**
+  String get serviceDuration;
+
+  /// No description provided for @baseChauffeurChargeHourly.
+  ///
+  /// In en, this message translates to:
+  /// **'Base Chauffeur Charge (Hourly)'**
+  String get baseChauffeurChargeHourly;
+
+  /// No description provided for @baseChauffeurCharge8Hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Base Chauffeur Charge (8 Hours)'**
+  String get baseChauffeurCharge8Hours;
+
+  /// No description provided for @baseChauffeurCharge12Hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Base Chauffeur Charge (12 Hours)'**
+  String get baseChauffeurCharge12Hours;
 
   /// No description provided for @luxury.
   ///
@@ -259,6 +355,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'SUV'**
   String get suv;
+
+  /// No description provided for @yourJourneyIsSecuredWeLlNotifyYouOnceYourChauffeurIsAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Your journey is secured. We’ll notify you once your chauffeur is assigned.'**
+  String get yourJourneyIsSecuredWeLlNotifyYouOnceYourChauffeurIsAssigned;
 
   /// No description provided for @convertible.
   ///
@@ -422,17 +524,35 @@ abstract class AppLocalizations {
   /// **'Location'**
   String get location;
 
-  /// No description provided for @specialId.
+  /// No description provided for @promoCode.
   ///
   /// In en, this message translates to:
-  /// **'Special ID'**
-  String get specialId;
+  /// **'Promo Code'**
+  String get promoCode;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
 
   /// No description provided for @phoneNumber.
   ///
   /// In en, this message translates to:
   /// **'Phone Number'**
   String get phoneNumber;
+
+  /// No description provided for @pleaseEnterYourPromoCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your promo code'**
+  String get pleaseEnterYourPromoCode;
+
+  /// No description provided for @enterYourPromoCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your promo code'**
+  String get enterYourPromoCode;
 
   /// No description provided for @submit.
   ///
@@ -529,6 +649,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter Special ID if available'**
   String get enterSpecialIdIFAvailable;
+
+  /// No description provided for @enterYourSpecialId.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your special ID'**
+  String get enterYourSpecialId;
+
+  /// No description provided for @pleaseEnterYourSpecialId.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your special ID'**
+  String get pleaseEnterYourSpecialId;
+
+  /// No description provided for @iAmACorporateEmployee.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you a corporate employee?'**
+  String get iAmACorporateEmployee;
 
   /// No description provided for @createAccount.
   ///
@@ -1022,6 +1160,12 @@ abstract class AppLocalizations {
   /// **'Charge'**
   String get charge;
 
+  /// No description provided for @noCarsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No cars available'**
+  String get noCarsAvailable;
+
   /// No description provided for @bookService.
   ///
   /// In en, this message translates to:
@@ -1039,6 +1183,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @remove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get remove;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
 
   /// No description provided for @loginAgainMessage.
   ///
@@ -1064,6 +1220,12 @@ abstract class AppLocalizations {
   /// **'Pickup time cannot be after departure time'**
   String get pickupTimeCannotBeAfterDepartureTime;
 
+  /// No description provided for @pickupTimeAtLeast4HoursBeforeDeparture.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup time must be at least 4 hours before departure time'**
+  String get pickupTimeAtLeast4HoursBeforeDeparture;
+
   /// No description provided for @noRecentBookings.
   ///
   /// In en, this message translates to:
@@ -1087,6 +1249,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No completed bookings'**
   String get noCompletedBookings;
+
+  /// No description provided for @noCancelledBookings.
+  ///
+  /// In en, this message translates to:
+  /// **'No cancelled bookings'**
+  String get noCancelledBookings;
 
   /// No description provided for @onceYouBookItWillAppearHere.
   ///
@@ -1183,6 +1351,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We reserve the right to modify these terms or policies relating to the app or services at any time. Continued use of the app after any such changes shall constitute your consent to such changes.'**
   String get termsSection7Content;
+
+  /// No description provided for @bookingConfirmedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking confirmed successfully!'**
+  String get bookingConfirmedSuccessfully;
+
+  /// No description provided for @bookingFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking failed. Please try again.'**
+  String get bookingFailed;
+
+  /// No description provided for @bookingConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Confirmed'**
+  String get bookingConfirmed;
+
+  /// No description provided for @byClickingContinueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'By Clicking continue button you agree to our '**
+  String get byClickingContinueButton;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get somethingWentWrong;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'OR'**
+  String get or;
+
+  /// No description provided for @continueWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get continueWithGoogle;
+
+  /// No description provided for @continueWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get continueWithApple;
+
+  /// No description provided for @invalidPhoneNumberOrCountryCode.
+  ///
+  /// In en, this message translates to:
+  /// **'invalid phone number or country code'**
+  String get invalidPhoneNumberOrCountryCode;
+
+  /// No description provided for @pleaseEnterAValidOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid OTP'**
+  String get pleaseEnterAValidOtp;
+
+  /// No description provided for @enterOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter OTP'**
+  String get enterOtp;
+
+  /// No description provided for @otpHasBeenSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP has been sent to '**
+  String get otpHasBeenSentTo;
+
+  /// No description provided for @didntReceiveTheCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t receive the code? '**
+  String get didntReceiveTheCode;
+
+  /// No description provided for @otpHasBeenResentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP has been resent to '**
+  String get otpHasBeenResentTo;
+
+  /// No description provided for @resendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend OTP'**
+  String get resendOtp;
+
+  /// No description provided for @resendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend in '**
+  String get resendIn;
+
+  /// No description provided for @verify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verify;
+
+  /// No description provided for @exitApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit App'**
+  String get exitApp;
+
+  /// No description provided for @exitAppConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to exit the app?'**
+  String get exitAppConfirm;
+
+  /// No description provided for @exit.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exit;
 }
 
 class _AppLocalizationsDelegate

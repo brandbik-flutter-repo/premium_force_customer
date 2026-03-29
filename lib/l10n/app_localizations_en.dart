@@ -45,6 +45,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recentBookings => 'Recent Bookings';
 
   @override
+  String get bookingInfo => 'Booking Info';
+
+  @override
+  String get bookingCategory => 'Booking Category';
+
+  @override
+  String get brand => 'Brand';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get duration => 'Duration';
+
+  @override
+  String get from => 'From';
+
+  @override
+  String get to => 'To';
+
+  @override
+  String get pricing => 'Pricing';
+
+  @override
+  String get paymentStatus => 'Payment Status';
+
+  @override
   String get premiumFleet => 'Premium Fleet';
 
   @override
@@ -57,7 +87,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get airportDeparture => 'Airport Departure';
 
   @override
+  String get goToBooking => 'Go to booking';
+
+  @override
+  String get backToHome => 'Back to home';
+
+  @override
   String get chauffeurService => 'Chauffeur Service';
+
+  @override
+  String get serviceDuration => 'Service Duration';
+
+  @override
+  String get baseChauffeurChargeHourly => 'Base Chauffeur Charge (Hourly)';
+
+  @override
+  String get baseChauffeurCharge8Hours => 'Base Chauffeur Charge (8 Hours)';
+
+  @override
+  String get baseChauffeurCharge12Hours => 'Base Chauffeur Charge (12 Hours)';
 
   @override
   String get luxury => 'Luxury';
@@ -88,6 +136,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get suv => 'SUV';
+
+  @override
+  String get yourJourneyIsSecuredWeLlNotifyYouOnceYourChauffeurIsAssigned =>
+      'Your journey is secured. We’ll notify you once your chauffeur is assigned.';
 
   @override
   String get convertible => 'Convertible';
@@ -171,10 +223,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get location => 'Location';
 
   @override
-  String get specialId => 'Special ID';
+  String get promoCode => 'Promo Code';
+
+  @override
+  String get saveChanges => 'Save Changes';
 
   @override
   String get phoneNumber => 'Phone Number';
+
+  @override
+  String get pleaseEnterYourPromoCode => 'Please enter your promo code';
+
+  @override
+  String get enterYourPromoCode => 'Enter your promo code';
 
   @override
   String get submit => 'Submit';
@@ -225,6 +286,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterSpecialIdIFAvailable => 'Enter Special ID if available';
+
+  @override
+  String get enterYourSpecialId => 'Enter your special ID';
+
+  @override
+  String get pleaseEnterYourSpecialId => 'Please enter your special ID';
+
+  @override
+  String get iAmACorporateEmployee => 'Are you a corporate employee?';
 
   @override
   String get createAccount => 'Create Account';
@@ -481,6 +551,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get charge => 'Charge';
 
   @override
+  String get noCarsAvailable => 'No cars available';
+
+  @override
   String get bookService => 'Book Service';
 
   @override
@@ -488,6 +561,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String get apply => 'Apply';
 
   @override
   String get loginAgainMessage =>
@@ -506,6 +585,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Pickup time cannot be after departure time';
 
   @override
+  String get pickupTimeAtLeast4HoursBeforeDeparture =>
+      'Pickup time must be at least 4 hours before departure time';
+
+  @override
   String get noRecentBookings => 'No recent bookings';
 
   @override
@@ -516,6 +599,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noCompletedBookings => 'No completed bookings';
+
+  @override
+  String get noCancelledBookings => 'No cancelled bookings';
 
   @override
   String get onceYouBookItWillAppearHere =>
@@ -573,4 +659,66 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get termsSection7Content =>
       'We reserve the right to modify these terms or policies relating to the app or services at any time. Continued use of the app after any such changes shall constitute your consent to such changes.';
+
+  @override
+  String get bookingConfirmedSuccessfully => 'Booking confirmed successfully!';
+
+  @override
+  String get bookingFailed => 'Booking failed. Please try again.';
+
+  @override
+  String get bookingConfirmed => 'Booking Confirmed';
+
+  @override
+  String get byClickingContinueButton =>
+      'By Clicking continue button you agree to our ';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong. Please try again.';
+
+  @override
+  String get or => 'OR';
+
+  @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get continueWithApple => 'Continue with Apple';
+
+  @override
+  String get invalidPhoneNumberOrCountryCode =>
+      'invalid phone number or country code';
+
+  @override
+  String get pleaseEnterAValidOtp => 'Please enter a valid OTP';
+
+  @override
+  String get enterOtp => 'Enter OTP';
+
+  @override
+  String get otpHasBeenSentTo => 'OTP has been sent to ';
+
+  @override
+  String get didntReceiveTheCode => 'Didn\'t receive the code? ';
+
+  @override
+  String get otpHasBeenResentTo => 'OTP has been resent to ';
+
+  @override
+  String get resendOtp => 'Resend OTP';
+
+  @override
+  String get resendIn => 'Resend in ';
+
+  @override
+  String get verify => 'Verify';
+
+  @override
+  String get exitApp => 'Exit App';
+
+  @override
+  String get exitAppConfirm => 'Do you really want to exit the app?';
+
+  @override
+  String get exit => 'Exit';
 }

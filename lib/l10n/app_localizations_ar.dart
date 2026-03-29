@@ -45,6 +45,36 @@ class AppLocalizationsAr extends AppLocalizations {
   String get recentBookings => 'الحجوزات الأخيرة';
 
   @override
+  String get bookingInfo => 'معلومات الحجز';
+
+  @override
+  String get bookingCategory => 'فئة الحجز';
+
+  @override
+  String get brand => 'الماركة';
+
+  @override
+  String get date => 'التاريخ';
+
+  @override
+  String get time => 'الوقت';
+
+  @override
+  String get duration => 'المدة';
+
+  @override
+  String get from => 'من';
+
+  @override
+  String get to => 'إلى';
+
+  @override
+  String get pricing => 'التسعير';
+
+  @override
+  String get paymentStatus => 'حالة الدفع';
+
+  @override
   String get premiumFleet => 'الأسطول الفاخر';
 
   @override
@@ -57,7 +87,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get airportDeparture => 'مغادرة المطار';
 
   @override
+  String get goToBooking => 'Go to booking';
+
+  @override
+  String get backToHome => 'Back to home';
+
+  @override
   String get chauffeurService => 'خدمة السائق';
+
+  @override
+  String get serviceDuration => 'مدة الخدمة';
+
+  @override
+  String get baseChauffeurChargeHourly => 'رسوم السائق الأساسية (بالساعة)';
+
+  @override
+  String get baseChauffeurCharge8Hours => 'رسوم السائق الأساسية (8 ساعات)';
+
+  @override
+  String get baseChauffeurCharge12Hours => 'رسوم السائق الأساسية (12 ساعة)';
 
   @override
   String get luxury => 'فاخر';
@@ -88,6 +136,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get suv => 'دفع رباعي';
+
+  @override
+  String get yourJourneyIsSecuredWeLlNotifyYouOnceYourChauffeurIsAssigned =>
+      'Your journey is secured. We’ll notify you once your chauffeur is assigned.';
 
   @override
   String get convertible => 'مكشوفة';
@@ -171,10 +223,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get location => 'الموقع';
 
   @override
-  String get specialId => 'الرقم المميز';
+  String get promoCode => 'رمز العرض';
+
+  @override
+  String get saveChanges => 'حفظ التغييرات';
 
   @override
   String get phoneNumber => 'رقم الهاتف';
+
+  @override
+  String get pleaseEnterYourPromoCode => 'يرجى إدخال رمز العرض الخاص بك';
+
+  @override
+  String get enterYourPromoCode => 'أدخل رمز العرض الخاص بك';
 
   @override
   String get submit => 'إرسال';
@@ -224,6 +285,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterSpecialIdIFAvailable => 'أدخل الرقم المميز إذا كان متوفرًا';
+
+  @override
+  String get enterYourSpecialId => 'أدخل رقمك المميز';
+
+  @override
+  String get pleaseEnterYourSpecialId => 'يرجى إدخال رقمك المميز';
+
+  @override
+  String get iAmACorporateEmployee => 'هل أنت موظف شركة؟';
 
   @override
   String get createAccount => 'إنشاء حساب';
@@ -477,6 +547,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get charge => 'الرسوم';
 
   @override
+  String get noCarsAvailable => 'لا توجد سيارات متاحة';
+
+  @override
   String get bookService => 'حجز الخدمة';
 
   @override
@@ -484,6 +557,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancel => 'إلغاء';
+
+  @override
+  String get remove => 'إزالة';
+
+  @override
+  String get apply => 'تطبيق';
 
   @override
   String get loginAgainMessage =>
@@ -501,6 +580,10 @@ class AppLocalizationsAr extends AppLocalizations {
       'وقت الاستلام لا يمكن أن يكون بعد وقت المغادرة';
 
   @override
+  String get pickupTimeAtLeast4HoursBeforeDeparture =>
+      'يجب أن يكون وقت الاستلام قبل 4 ساعات على الأقل من وقت المغادرة';
+
+  @override
   String get noRecentBookings => 'لا توجد حجوزات سابقة';
 
   @override
@@ -511,6 +594,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noCompletedBookings => 'لا توجد حجوزات مكتملة';
+
+  @override
+  String get noCancelledBookings => 'لا توجد حجوزات ملغاة';
 
   @override
   String get onceYouBookItWillAppearHere => 'بمجرد حجز خدمة، ستظهر هنا.';
@@ -567,4 +653,66 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get termsSection7Content =>
       'نحتفظ بالحق في تعديل هذه الشروط أو السياسات المتعلقة بالتطبيق أو الخدمات في أي وقت. يشكل استمرارك في استخدام التطبيق بعد أي تغييرات من هذا القبيل موافقتك على هذه التغييرات.';
+
+  @override
+  String get bookingConfirmedSuccessfully => 'تم تأكيد الحجز بنجاح!';
+
+  @override
+  String get bookingFailed => 'فشل الحجز. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get bookingConfirmed => 'تم تأكيد الحجز';
+
+  @override
+  String get byClickingContinueButton =>
+      'بالنقر على زر المتابعة، فإنك توافق على';
+
+  @override
+  String get somethingWentWrong => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get or => 'أو';
+
+  @override
+  String get continueWithGoogle => 'المتابعة باستخدام Google';
+
+  @override
+  String get continueWithApple => 'المتابعة باستخدام Apple';
+
+  @override
+  String get invalidPhoneNumberOrCountryCode =>
+      'رقم الهاتف أو رمز الدولة غير صحيح';
+
+  @override
+  String get pleaseEnterAValidOtp => 'يرجى إدخال رمز تحقق صحيح';
+
+  @override
+  String get enterOtp => 'أدخل رمز التحقق';
+
+  @override
+  String get otpHasBeenSentTo => 'تم إرسال رمز التحقق إلى ';
+
+  @override
+  String get didntReceiveTheCode => 'لم تصلك الرسالة؟ ';
+
+  @override
+  String get otpHasBeenResentTo => 'تم إعادة إرسال رمز التحقق إلى ';
+
+  @override
+  String get resendOtp => 'إعادة إرسال الرمز';
+
+  @override
+  String get resendIn => 'إعادة الإرسال خلال ';
+
+  @override
+  String get verify => 'تحقق';
+
+  @override
+  String get exitApp => 'إغلاق التطبيق';
+
+  @override
+  String get exitAppConfirm => 'هل تريد حقاً إغلاق التطبيق؟';
+
+  @override
+  String get exit => 'خروج';
 }

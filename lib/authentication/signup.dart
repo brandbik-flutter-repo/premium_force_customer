@@ -6,10 +6,12 @@ import 'package:premium_force_main/authentication/location_picker.dart';
 import 'package:premium_force_main/common_widgets/button.dart';
 import 'package:premium_force_main/common_widgets/premiumloader.dart';
 import 'package:premium_force_main/common_widgets/textfield.dart';
+import 'package:premium_force_main/common_widgets/snackbar.dart';
 import 'package:premium_force_main/home/home.dart';
 import 'package:premium_force_main/l10n/app_localizations.dart';
 import 'package:premium_force_main/storage/user_local_storage.dart';
 import 'package:premium_force_main/utils/smooth_navigation.dart';
+import 'package:country_picker/country_picker.dart';
 
 class SignUpPage extends StatefulWidget {
   final String countryCode;
@@ -17,6 +19,8 @@ class SignUpPage extends StatefulWidget {
   final String? googleEmail;
   final String? googleDisplayName;
   final String? googlePhotoUrl;
+  final String? appleEmail;
+  final String? appleDisplayName;
   const SignUpPage({
     super.key,
     required this.countryCode,
@@ -24,6 +28,8 @@ class SignUpPage extends StatefulWidget {
     this.googleEmail,
     this.googleDisplayName,
     this.googlePhotoUrl,
+    this.appleEmail,
+    this.appleDisplayName,
   });
 
   @override
@@ -43,20 +49,45 @@ class _SignUpPageState extends State<SignUpPage>
   double? _latitude;
   double? _longitude;
   bool _isLoading = false;
+  bool _isCorporateEmployee = false; // New: track corporate employee checkbox
   late AnimationController _animController;
   late Animation<double> _fadeAnimation;
+
+  // Country code management
+  String _selectedCountryCode = '966'; // Default to Saudi Arabia
+  bool _isGoogleSignUp = false; // Track if this is from Google Sign-In
+  bool _isCheckingPromo = false;
+  bool _isPromoValid = false;
+  String? _appliedPromoId;
+  OverlayEntry? _overlayEntry;
 
   @override
   void initState() {
     super.initState();
+
+    // Determine if this is from social sign-in (Google or Apple)
+    _isGoogleSignUp =
+        (widget.googleEmail != null && widget.googleEmail!.isNotEmpty) ||
+        (widget.appleEmail != null && widget.appleEmail!.isNotEmpty);
+
+    // Set initial country code
+    _selectedCountryCode = widget.countryCode.replaceAll('+', '');
+
     _phoneController.text = widget.phoneNumber;
 
-    // Pre-fill from Google Sign-In data if available
-    if (widget.googleDisplayName != null) {
+    // Pre-fill from sign-in data (Google or Apple)
+    if (widget.googleDisplayName != null &&
+        widget.googleDisplayName!.isNotEmpty) {
       _nameController.text = widget.googleDisplayName!;
+    } else if (widget.appleDisplayName != null &&
+        widget.appleDisplayName!.isNotEmpty) {
+      _nameController.text = widget.appleDisplayName!;
     }
-    if (widget.googleEmail != null) {
+
+    if (widget.googleEmail != null && widget.googleEmail!.isNotEmpty) {
       _emailController.text = widget.googleEmail!;
+    } else if (widget.appleEmail != null && widget.appleEmail!.isNotEmpty) {
+      _emailController.text = widget.appleEmail!;
     }
 
     _animController = AnimationController(
@@ -72,6 +103,7 @@ class _SignUpPageState extends State<SignUpPage>
 
   @override
   void dispose() {
+    _overlayEntry?.remove();
     _nameController.dispose();
     _emailController.dispose();
     _locationController.dispose();
@@ -79,6 +111,34 @@ class _SignUpPageState extends State<SignUpPage>
     _phoneController.dispose();
     _animController.dispose();
     super.dispose();
+  }
+
+  void _showCustomSnackBar(String message, {String type = "E"}) {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+        left: 20,
+        right: 20,
+        child: Material(
+          color: Colors.transparent,
+          child: AnimatedSnackBar(
+            message: message,
+            type: type,
+            onDismissed: () {
+              if (mounted) {
+                _overlayEntry?.remove();
+                _overlayEntry = null;
+              }
+            },
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(_overlayEntry!);
   }
 
   Future<void> _pickImage() async {
@@ -236,25 +296,78 @@ class _SignUpPageState extends State<SignUpPage>
     }
   }
 
+  Future<void> _verifyPromoCode() async {
+    final code = _specialIdController.text.trim();
+    if (code.isEmpty) return;
+
+    setState(() {
+      _isCheckingPromo = true;
+      _isPromoValid = false;
+      _appliedPromoId = null;
+    });
+
+    final result = await ApiService().getSpecialContentByCode(code: code);
+
+    if (result['success'] == true) {
+      final promo = result['data'];
+      if (promo != null && promo['isActive'] == true) {
+        setState(() {
+          _isPromoValid = true;
+          _appliedPromoId = promo['_id'] ?? promo['id'];
+        });
+        if (mounted) {
+          _showCustomSnackBar("Promo code applied successfully!", type: "S");
+        }
+      } else {
+        setState(() {
+          _isPromoValid = false;
+          _appliedPromoId = null;
+        });
+        if (mounted) {
+          _showCustomSnackBar(
+            promo != null && promo['isActive'] == false
+                ? "Promo code is inactive"
+                : "Invalid promo code",
+            type: "E",
+          );
+        }
+      }
+    } else {
+      if (mounted) {
+        _showCustomSnackBar(
+          result['message'] ?? "Invalid or inactive promo code",
+          type: "E",
+        );
+      }
+    }
+
+    setState(() => _isCheckingPromo = false);
+  }
+
+  void _removePromoCode() {
+    setState(() {
+      _isPromoValid = false;
+      _appliedPromoId = null;
+      _specialIdController.clear();
+    });
+    _showCustomSnackBar("Promo code removed", type: "W");
+  }
+
   Future<void> _handleSignUp() async {
     if (!_formKey.currentState!.validate()) return;
 
     if (_profileImage == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.pleaseAddAProfilePicture),
-          backgroundColor: Colors.red,
-        ),
+      _showCustomSnackBar(
+        AppLocalizations.of(context)!.pleaseAddAProfilePicture,
+        type: "E",
       );
       return;
     }
 
     if (_locationController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.pleaseSelectYourLocation),
-          backgroundColor: Colors.red,
-        ),
+      _showCustomSnackBar(
+        AppLocalizations.of(context)!.pleaseSelectYourLocation,
+        type: "E",
       );
       return;
     }
@@ -262,24 +375,37 @@ class _SignUpPageState extends State<SignUpPage>
     setState(() => _isLoading = true);
 
     final token = UserLocalStorage.getToken();
+    final phoneNumber = _phoneController.text.trim();
+    final countryCode = '+$_selectedCountryCode';
+
+    // Only include special ID if corporate employee is checked and promo is valid
+    final specialId = (_isCorporateEmployee && _isPromoValid)
+        ? _specialIdController.text.trim()
+        : null;
 
     final result = await ApiService().createUser(
       username: _nameController.text.trim(),
       email: _emailController.text.trim(),
-      countryCode: widget.countryCode,
-      phoneNumber: widget.phoneNumber,
+      countryCode: countryCode,
+      phoneNumber: phoneNumber,
       location: _locationController.text.trim(),
       lat: _latitude,
       long: _longitude,
       profileImage: _profileImage,
-      specialId: _specialIdController.text.trim(),
+      specialId: specialId,
       token: token,
     );
 
     if (!mounted) return;
-    setState(() => _isLoading = false);
 
     if (result['success'] == true) {
+      // If promo was used, increment its count
+      if (_isPromoValid && _appliedPromoId != null) {
+        await ApiService().incrementSpecialContentCount(
+          id: _appliedPromoId!,
+          token: token,
+        );
+      }
       // Save only userId + phoneNumber to local storage
       final userData =
           (result['user'] ?? result['data']) as Map<String, dynamic>?;
@@ -287,7 +413,7 @@ class _SignUpPageState extends State<SignUpPage>
         final uid = (userData['_id'] ?? userData['id'] ?? '') as String;
         await UserLocalStorage.saveUserCredentials(
           userId: uid,
-          phoneNumber: widget.phoneNumber,
+          phoneNumber: phoneNumber,
         );
 
         // Persist the full user data locally
@@ -315,13 +441,12 @@ class _SignUpPageState extends State<SignUpPage>
         (route) => false,
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(result['message'] as String? ?? 'Signup failed'),
-          backgroundColor: Colors.red,
-        ),
+      _showCustomSnackBar(
+        result['message'] as String? ?? 'Signup failed',
+        type: "E",
       );
     }
+    setState(() => _isLoading = false);
   }
 
   @override
@@ -511,37 +636,133 @@ class _SignUpPageState extends State<SignUpPage>
 
                         const SizedBox(height: 20),
 
-                        // Phone number (display only)
+                        // Phone number (editable with country code picker)
                         PremiumTextField(
                           title: AppLocalizations.of(context)!.phoneNumber,
                           controller: _phoneController,
-                          hintText: widget.phoneNumber,
+                          hintText: AppLocalizations.of(
+                            context,
+                          )!.enterMobileNumber,
                           fontsize: 15,
+                          keyboardType: TextInputType.phone,
                           needTitle: true,
                           obscureText: false,
-                          enabled: false,
-                          readOnly: true,
-                          prefixIcon: ShaderMask(
-                            shaderCallback: (Rect bounds) {
-                              return const LinearGradient(
-                                colors: [
-                                  Color(0xFF49280B),
-                                  Color(0xFFE4A46B),
-                                  Color(0xFF60350F),
-                                ],
-                              ).createShader(bounds);
+                          prefixIcon: GestureDetector(
+                            onTap: () {
+                              showCountryPicker(
+                                context: context,
+                                showPhoneCode: true,
+                                customFlagBuilder: (context) =>
+                                    const SizedBox.shrink(),
+                                countryListTheme: CountryListThemeData(
+                                  backgroundColor: const Color(0xFF141313),
+                                  textStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                  searchTextStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30),
+                                  ),
+                                  inputDecoration: InputDecoration(
+                                    hintText: AppLocalizations.of(
+                                      context,
+                                    )!.search,
+                                    hintStyle: TextStyle(
+                                      color: Colors.white.withAlpha(180),
+                                    ),
+                                    prefixIcon: const Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                    ),
+                                    filled: true,
+                                    fillColor: const Color(0xFF1A1410),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade800,
+                                      ),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade800,
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: const BorderSide(
+                                        color: Color(0xFFE4A46B),
+                                      ),
+                                    ),
+                                  ),
+                                  bottomSheetHeight:
+                                      MediaQuery.of(context).size.height * 0.75,
+                                ),
+                                onSelect: (Country country) {
+                                  setState(() {
+                                    _selectedCountryCode = country.phoneCode;
+                                  });
+                                },
+                              );
                             },
-                            child: const Icon(
-                              Icons.phone_outlined,
-                              color: Colors.white,
-                              size: 20,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              decoration: const BoxDecoration(
+                                color: Colors.transparent,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    '+$_selectedCountryCode',
+                                    textDirection: TextDirection.ltr,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.white,
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
+                                    height: 24,
+                                    width: 1,
+                                    color: Colors.grey,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(
+                                context,
+                              )!.pleaseEnterYourMobileNumber;
+                            }
+                            if (value.length < 9) {
+                              return AppLocalizations.of(
+                                context,
+                              )!.pleaseEnterValidMobileNumber;
+                            }
+                            return null;
+                          },
                         ),
 
                         const SizedBox(height: 20),
 
-                        // Email field
+                        // Email field (non-editable if from Google Sign-In, editable otherwise)
                         PremiumTextField(
                           title: AppLocalizations.of(context)!.emailAddress,
                           controller: _emailController,
@@ -552,6 +773,10 @@ class _SignUpPageState extends State<SignUpPage>
                           keyboardType: TextInputType.emailAddress,
                           needTitle: true,
                           obscureText: false,
+                          enabled:
+                              !_isGoogleSignUp, // Disable if from Google Sign-In
+                          readOnly:
+                              _isGoogleSignUp, // Read-only if from Google Sign-In
                           prefixIcon: ShaderMask(
                             shaderCallback: (Rect bounds) {
                               return const LinearGradient(
@@ -592,35 +817,146 @@ class _SignUpPageState extends State<SignUpPage>
 
                         const SizedBox(height: 20),
 
-                        // Special ID (optional)
-                        PremiumTextField(
-                          title: AppLocalizations.of(
-                            context,
-                          )!.specialidoptional,
-                          controller: _specialIdController,
-                          hintText: AppLocalizations.of(
-                            context,
-                          )!.enterSpecialIdIFAvailable,
-                          fontsize: 15,
-                          needTitle: true,
-                          obscureText: false,
-                          prefixIcon: ShaderMask(
-                            shaderCallback: (Rect bounds) {
-                              return const LinearGradient(
-                                colors: [
-                                  Color(0xFF49280B),
-                                  Color(0xFFE4A46B),
-                                  Color(0xFF60350F),
-                                ],
-                              ).createShader(bounds);
-                            },
-                            child: const Icon(
-                              Icons.badge_outlined,
-                              color: Colors.white,
-                              size: 20,
+                        // Corporate Employee Checkbox
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white.withAlpha(60),
+                              width: 1,
                             ),
+                            borderRadius: BorderRadius.circular(12),
+                            color: const Color(0xFF0D0A08),
+                          ),
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _isCorporateEmployee =
+                                        !_isCorporateEmployee;
+                                  });
+                                },
+                                child: Container(
+                                  width: 20,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: _isCorporateEmployee
+                                          ? const Color(0xFFE4A46B)
+                                          : Colors.white.withAlpha(100),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: _isCorporateEmployee
+                                        ? const Color(0xFFE4A46B)
+                                        : Colors.transparent,
+                                  ),
+                                  child: _isCorporateEmployee
+                                      ? const Icon(
+                                          Icons.check,
+                                          size: 14,
+                                          color: Color(0xFF0D0A08),
+                                        )
+                                      : null,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.iAmACorporateEmployee,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
+
+                        if (_isCorporateEmployee) ...[
+                          const SizedBox(height: 20),
+                          // Special ID (optional)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: PremiumTextField(
+                                  title:
+                                      AppLocalizations.of(context)!.promoCode,
+                                  controller: _specialIdController,
+                                  hintText: AppLocalizations.of(
+                                    context,
+                                  )!.enterYourPromoCode,
+                                  fontsize: 15,
+                                  needTitle: true,
+                                  obscureText: false,
+                                  readOnly: _isPromoValid, // Lock if valid
+                                  enabled: !_isPromoValid, // Lock if valid
+                                  prefixIcon: ShaderMask(
+                                    shaderCallback: (Rect bounds) {
+                                      return const LinearGradient(
+                                        colors: [
+                                          Color(0xFF49280B),
+                                          Color(0xFFE4A46B),
+                                          Color(0xFF60350F),
+                                        ],
+                                      ).createShader(bounds);
+                                    },
+                                    child: const Icon(
+                                      Icons.badge_outlined,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (_isCorporateEmployee &&
+                                        (value == null || value.isEmpty)) {
+                                      return AppLocalizations.of(
+                                        context,
+                                      )!.pleaseEnterYourPromoCode;
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                flex: 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 0),
+                                  child: SizedBox(
+                                    height: 59,
+                                    child: PremiumButton(
+                                      showLoader: _isCheckingPromo,
+                                      fontsize: 14,
+                                      text: _isPromoValid ? "Remove" : "Apply",
+                                      gradient: _isPromoValid
+                                          ? [
+                                            Colors.red.shade800,
+                                            Colors.red.shade400,
+                                          ]
+                                          : null,
+                                      onTap: _isCheckingPromo
+                                          ? () {}
+                                          : _isPromoValid
+                                              ? _removePromoCode
+                                              : _verifyPromoCode,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
 
                         const SizedBox(height: 36),
 

@@ -12,10 +12,10 @@ class BookingRequestModel {
   String? dropOffAddress;
   String? carclass;
   String? carName;
-  String? charge;
+  double? charge;
   String? carbrand;
   String? carmodel;
-  File? carimage;
+  File? carImage;
   String? specialRequestText;
   File? specialRequestAudio;
   String? passengerCount;
@@ -27,6 +27,18 @@ class BookingRequestModel {
   String? driverID;
   String? bookingStatus;
   String? paymentStatus;
+  String? cityID;
+  String? airportID;
+  String? terminalID;
+  String? flightNumber;
+  String? terminal;
+  String? pickupAddress;
+  String? carID;
+  String? brandID;
+  String? categoryID;
+  int? serviceDuration;
+  int? estimatedHours;
+  String? specialId;
 
   BookingRequestModel({
     this.category,
@@ -43,7 +55,7 @@ class BookingRequestModel {
     this.charge,
     this.carbrand,
     this.carmodel,
-    this.carimage,
+    this.carImage,
     this.specialRequestText,
     this.specialRequestAudio,
     this.passengerCount,
@@ -54,6 +66,18 @@ class BookingRequestModel {
     this.driverID,
     this.bookingStatus,
     this.paymentStatus,
+    this.cityID,
+    this.airportID,
+    this.terminalID,
+    this.flightNumber,
+    this.terminal,
+    this.pickupAddress,
+    this.carID,
+    this.brandID,
+    this.categoryID,
+    this.serviceDuration,
+    this.estimatedHours,
+    this.specialId,
   });
 
   Map<String, dynamic> toMap() {
@@ -72,7 +96,7 @@ class BookingRequestModel {
       if (charge != null) 'charge': charge,
       if (carbrand != null) 'carbrand': carbrand,
       if (carmodel != null) 'carmodel': carmodel,
-      if (carimage != null) 'carimage': carimage!.path, // Displaying path
+      if (carImage != null) 'carImage': carImage!.path,
       if (specialRequestText != null) 'specialRequestText': specialRequestText,
       if (specialRequestAudio != null)
         'specialRequestAudio': specialRequestAudio!.path,
@@ -84,6 +108,18 @@ class BookingRequestModel {
       if (driverID != null) 'driverID': driverID,
       if (bookingStatus != null) 'bookingStatus': bookingStatus,
       if (paymentStatus != null) 'paymentStatus': paymentStatus,
+      if (cityID != null) 'cityID': cityID,
+      if (airportID != null) 'airportID': airportID,
+      if (terminalID != null) 'terminalID': terminalID,
+      if (flightNumber != null) 'flightNumber': flightNumber,
+      if (terminal != null) 'terminal': terminal,
+      if (pickupAddress != null) 'pickupAddress': pickupAddress,
+      if (carID != null) 'carID': carID,
+      if (brandID != null) 'brandID': brandID,
+      if (categoryID != null) 'categoryID': categoryID,
+      if (serviceDuration != null) 'serviceDuration': serviceDuration,
+      if (estimatedHours != null) 'estimatedHours': estimatedHours,
+      if (specialId != null) 'specialId': specialId,
     };
   }
 
