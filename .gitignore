@@ -48,3 +48,9 @@ app.*.map.json
 android/key.properties
 *.jks
 *.keystore
+
+# Env files
+.env
+
+# Postman Collections
+assets/PremiumForce.postman_collection_13_03_2026

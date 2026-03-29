@@ -56,11 +56,25 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     // ── Profile image ──────────────────────────────────────
     String? imageUrl;
-    final profileRaw = json['profileImage'];
+    final profileRaw = json['profileImage'] ?? json['profileImageUrl'];
     if (profileRaw is String) {
       imageUrl = profileRaw;
     } else if (profileRaw is Map<String, dynamic>) {
       imageUrl = profileRaw['url'] as String?;
+    }
+
+    // Modernize relative paths if they don't start with http/https
+    if (imageUrl != null &&
+        imageUrl.isNotEmpty &&
+        !imageUrl.startsWith('http')) {
+      // Backend images are usually in /uploads or relative to root
+      const String host =
+          'http://ec2-54-252-191-113.ap-southeast-2.compute.amazonaws.com:5000';
+      if (imageUrl.startsWith('/')) {
+        imageUrl = '$host$imageUrl';
+      } else {
+        imageUrl = '$host/$imageUrl';
+      }
     }
 
     // ── Location ───────────────────────────────────────────
@@ -81,22 +95,22 @@ class UserModel {
     }
 
     return UserModel(
-      uid: (json['_id'] ?? json['id'] ?? json['uid'] ?? '') as String,
-      username: json['username'] as String,
-      email: json['email'] as String,
-      countryCode: (json['countryCode'] ?? '+966') as String,
-      phoneNumber: json['phoneNumber'] as String,
+      uid: (json['_id'] ?? json['id'] ?? json['uid'] ?? '').toString(),
+      username: (json['username'] ?? '').toString(),
+      email: (json['email'] ?? '').toString(),
+      countryCode: (json['countryCode'] ?? '+966').toString(),
+      phoneNumber: (json['phoneNumber'] ?? '').toString(),
       location: locationStr,
       lat: lat,
       long: lng,
       profileImageUrl: imageUrl,
-      specialId: json['specialId'] as String?,
-      role: (json['role'] ?? 'customer') as String,
-      isActive: (json['isActive'] as bool?) ?? true,
+      specialId: json['specialId']?.toString(),
+      role: (json['role'] ?? 'customer').toString(),
+      isActive: (json['isActive'] is bool) ? json['isActive'] as bool : true,
       createdAt: json['createdAt'] != null
           ? (json['createdAt'] is DateTime
                 ? json['createdAt'] as DateTime
-                : DateTime.parse(json['createdAt'] as String))
+                : DateTime.tryParse(json['createdAt'].toString()) ?? DateTime.now())
           : DateTime.now(),
     );
   }

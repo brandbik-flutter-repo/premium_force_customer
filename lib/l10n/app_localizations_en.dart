@@ -39,7 +39,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bookings => 'Bookings';
 
   @override
+  String get newBooking => 'New Booking';
+
+  @override
   String get recentBookings => 'Recent Bookings';
+
+  @override
+  String get bookingInfo => 'Booking Info';
+
+  @override
+  String get bookingCategory => 'Booking Category';
+
+  @override
+  String get brand => 'Brand';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get duration => 'Duration';
+
+  @override
+  String get from => 'From';
+
+  @override
+  String get to => 'To';
+
+  @override
+  String get pricing => 'Pricing';
+
+  @override
+  String get paymentStatus => 'Payment Status';
 
   @override
   String get premiumFleet => 'Premium Fleet';
@@ -54,13 +87,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String get airportDeparture => 'Airport Departure';
 
   @override
+  String get goToBooking => 'Go to booking';
+
+  @override
+  String get backToHome => 'Back to home';
+
+  @override
   String get chauffeurService => 'Chauffeur Service';
+
+  @override
+  String get serviceDuration => 'Service Duration';
+
+  @override
+  String get baseChauffeurChargeHourly => 'Base Chauffeur Charge (Hourly)';
+
+  @override
+  String get baseChauffeurCharge8Hours => 'Base Chauffeur Charge (8 Hours)';
+
+  @override
+  String get baseChauffeurCharge12Hours => 'Base Chauffeur Charge (12 Hours)';
 
   @override
   String get luxury => 'Luxury';
 
   @override
   String get city => 'City';
+
+  @override
+  String get airport => 'Airport';
+
+  @override
+  String get terminal => 'Terminal';
+
+  @override
+  String get riyadh => 'Riyadh';
+
+  @override
+  String get jeddah => 'Jeddah';
+
+  @override
+  String get dammam => 'Dammam';
 
   @override
   String get business => 'Business';
@@ -70,6 +136,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get suv => 'SUV';
+
+  @override
+  String get yourJourneyIsSecuredWeLlNotifyYouOnceYourChauffeurIsAssigned =>
+      'Your journey is secured. We’ll notify you once your chauffeur is assigned.';
 
   @override
   String get convertible => 'Convertible';
@@ -153,10 +223,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get location => 'Location';
 
   @override
-  String get specialId => 'Special ID';
+  String get promoCode => 'Promo Code';
+
+  @override
+  String get saveChanges => 'Save Changes';
 
   @override
   String get phoneNumber => 'Phone Number';
+
+  @override
+  String get pleaseEnterYourPromoCode => 'Please enter your promo code';
+
+  @override
+  String get enterYourPromoCode => 'Enter your promo code';
 
   @override
   String get submit => 'Submit';
@@ -209,6 +288,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterSpecialIdIFAvailable => 'Enter Special ID if available';
 
   @override
+  String get enterYourSpecialId => 'Enter your special ID';
+
+  @override
+  String get pleaseEnterYourSpecialId => 'Please enter your special ID';
+
+  @override
+  String get iAmACorporateEmployee => 'Are you a corporate employee?';
+
+  @override
   String get createAccount => 'Create Account';
 
   @override
@@ -241,4 +329,396 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pleaseAgreeToTheTermsAndConditionsAndPrivacyPolicy =>
       'Please agree to the terms and conditions and privacy policy.';
+
+  @override
+  String get tripInfo => 'Trip Info';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get serviceType => 'Service Type';
+
+  @override
+  String get tellUsAboutYourJourney => 'Tell Us About Your Journey';
+
+  @override
+  String get enterFlightNumber => 'Enter Flight Number';
+
+  @override
+  String get flightNumber => 'Flight Number';
+
+  @override
+  String get arrivalDateAndTime => 'Arrival Date and Time';
+
+  @override
+  String get departureDateAndTime => 'Departure Date and Time';
+
+  @override
+  String get pickupDateAndTime => 'Pickup Date and Time';
+
+  @override
+  String get pickupLocation => 'Pickup Location';
+
+  @override
+  String get dropLocation => 'Drop Location';
+
+  @override
+  String get tapToSelectAPickupLocation => 'Tap to select a pickup location';
+
+  @override
+  String get tapToSelectADropLocation => 'Tap to select a drop location';
+
+  @override
+  String get terminal1 => 'Terminal 1';
+
+  @override
+  String get terminal2 => 'Terminal 2';
+
+  @override
+  String get terminal3 => 'Terminal 3';
+
+  @override
+  String get terminal4 => 'Terminal 4';
+
+  @override
+  String get terminal5 => 'Terminal 5';
+
+  @override
+  String get hajjTerminal => 'Hajj Terminal';
+
+  @override
+  String get northTerminal => 'North Terminal';
+
+  @override
+  String get southTerminal => 'South Terminal';
+
+  @override
+  String get passengerTerminal => 'Passenger Terminal';
+
+  @override
+  String get aramcoTerminal => 'Aramco Terminal';
+
+  @override
+  String get royalTerminal => 'Royal Terminal';
+
+  @override
+  String get flightNumberIsRequired => 'Flight number is required';
+
+  @override
+  String get pickupLocationIsRequired => 'Pickup location is required';
+
+  @override
+  String get dropLocationIsRequired => 'Drop location is required';
+
+  @override
+  String get kingKhalidInternationalAirport =>
+      'King Khalid International Airport';
+
+  @override
+  String get kingFahadInternationalAirport =>
+      'King Fahad International Airport';
+
+  @override
+  String get kingAbdulazizInternationalAirport =>
+      'King Abdulaziz International Airport';
+
+  @override
+  String get pickupDateAndTimeIsRequired => 'Pickup date and time are required';
+
+  @override
+  String get dateAndTimeIsRequired => 'Date and time are required';
+
+  @override
+  String get previouslySelectedTimeClearedAsItIsInThePast =>
+      'Previously selected time cleared as it is in the past';
+
+  @override
+  String get selectDate => 'Select Date';
+
+  @override
+  String get pleaseSelectADateFirst => 'Please select a date first';
+
+  @override
+  String get selectTime => 'Select Time';
+
+  @override
+  String get cannotSelectPastTimeForToday =>
+      'Cannot select past time for today';
+
+  @override
+  String get chooseYouPreferredVehicle => 'Choose you preferred vehicle';
+
+  @override
+  String get chauffeurredClass => 'Chauffeurred Class';
+
+  @override
+  String get preferredModel => 'Preferred Model';
+
+  @override
+  String get choosePreferredBrand => 'Choose Preferred Brand';
+
+  @override
+  String get specialRequests => 'Special Requests';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get luxurySedan => 'Luxury Sedan';
+
+  @override
+  String get luxurySuv => 'Luxury SUV';
+
+  @override
+  String get luxuryCoupe => 'Luxury Coupe';
+
+  @override
+  String get luxurySports => 'Luxury Sports';
+
+  @override
+  String get luxuryConvertible => 'Luxury Convertible';
+
+  @override
+  String get model1 => 'Model 1';
+
+  @override
+  String get model2 => 'Model 2';
+
+  @override
+  String get model3 => 'Model 3';
+
+  @override
+  String get providePassengerInfo => 'Provide Passenger Info';
+
+  @override
+  String get numberOfPassengers => 'No. of Passengers';
+
+  @override
+  String get passengerNameAtleastOne =>
+      'Passenger Name (Atleast one separated by commas)';
+
+  @override
+  String get passengerName => 'Passenger Name';
+
+  @override
+  String get pleaseEnterAtleastOnepassengerName =>
+      'Please enter atleast one passenger name';
+
+  @override
+  String get pleaseEnterAMobileNumber => 'Please enter a mobile number';
+
+  @override
+  String get pleaseEnterAPassengerName => 'Please enter a passenger name';
+
+  @override
+  String get reviewAndConfirm => 'Review and Confirm';
+
+  @override
+  String get reviewAndConfirmYourRequest => 'Review and Confirm Your Request';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get service => 'Service';
+
+  @override
+  String get passengers => 'Passengers';
+
+  @override
+  String get notAssigned => 'Not Assigned';
+
+  @override
+  String get chauffeur => 'Chauffeur';
+
+  @override
+  String get totalDistance => 'Total Distance';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get vat => 'VAT (15%)';
+
+  @override
+  String get paymentSummary => 'Payment Summary';
+
+  @override
+  String get km => 'KM';
+
+  @override
+  String get charge => 'Charge';
+
+  @override
+  String get noCarsAvailable => 'No cars available';
+
+  @override
+  String get bookService => 'Book Service';
+
+  @override
+  String get logoutConfirm => 'Are you sure you want to log out?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get loginAgainMessage =>
+      'You will have to login again next time you open the app.';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Are you sure you want to delete your account?';
+
+  @override
+  String get deleteAccountMessage =>
+      'This action cannot be undone and all your data will be cleared.';
+
+  @override
+  String get pickupTimeCannotBeAfterDepartureTime =>
+      'Pickup time cannot be after departure time';
+
+  @override
+  String get pickupTimeAtLeast4HoursBeforeDeparture =>
+      'Pickup time must be at least 4 hours before departure time';
+
+  @override
+  String get noRecentBookings => 'No recent bookings';
+
+  @override
+  String get noUpcomingBookings => 'No upcoming bookings';
+
+  @override
+  String get noOngoingBookings => 'No ongoing bookings';
+
+  @override
+  String get noCompletedBookings => 'No completed bookings';
+
+  @override
+  String get noCancelledBookings => 'No cancelled bookings';
+
+  @override
+  String get onceYouBookItWillAppearHere =>
+      'Once you book a service, it will appear here.';
+
+  @override
+  String get termsIntro =>
+      'These terms and conditions outline the rules and regulations for the use of the Premium Force application, a luxury chauffeur booking service operating in the Kingdom of Saudi Arabia.\n\nBy accessing this app, we assume you accept these terms and conditions. Do not continue to use Premium Force if you do not agree to take all of the terms and conditions stated on this page.\n';
+
+  @override
+  String get termsSection1Title => '1. App Services & Bookings';
+
+  @override
+  String get termsSection1Content =>
+      'Premium Force connects users with luxury chauffeur services within Saudi Arabia. All bookings are subject to availability, and we reserve the right to decline or cancel bookings under specific circumstances outlined in our policies.';
+
+  @override
+  String get termsSection2Title => '2. User Responsibilities';
+
+  @override
+  String get termsSection2Content =>
+      'You are specifically restricted from all of the following:\n• using this app in any way that impacts user access or disrupts the chauffeur services;\n• using this app contrary to the applicable laws and regulations of the Kingdom of Saudi Arabia;\n• behaving inappropriately towards our chauffeurs or damaging the provided luxury vehicles.';
+
+  @override
+  String get termsSection3Title => '3. Payments & Cancellations';
+
+  @override
+  String get termsSection3Content =>
+      'All payments for chauffeur services must be made through the approved methods within the app. Cancellation policies apply to all bookings. Late cancellations or no-shows may incur charges as detailed during the booking process.';
+
+  @override
+  String get termsSection4Title => '4. Privacy';
+
+  @override
+  String get termsSection4Content =>
+      'Please read our Privacy Policy. Your use of the Application signifies your continuing consent to our Privacy Policy regarding the collection and use of your personal and location data necessary for the chauffeur service.';
+
+  @override
+  String get termsSection5Title => '5. Disclaimer of Warranties';
+
+  @override
+  String get termsSection5Content =>
+      'This app is provided \"as is,\" and Premium Force expresses no representations or warranties related to the continuous availability of the app or specific chauffeurs.';
+
+  @override
+  String get termsSection6Title => '6. Governing Law & Jurisdiction';
+
+  @override
+  String get termsSection6Content =>
+      'These Terms will be governed by and interpreted in accordance with the laws of the Kingdom of Saudi Arabia, and you submit to the exclusive jurisdiction of the courts located in Saudi Arabia for the resolution of any disputes.';
+
+  @override
+  String get termsSection7Title => '7. Changes and Amendments';
+
+  @override
+  String get termsSection7Content =>
+      'We reserve the right to modify these terms or policies relating to the app or services at any time. Continued use of the app after any such changes shall constitute your consent to such changes.';
+
+  @override
+  String get bookingConfirmedSuccessfully => 'Booking confirmed successfully!';
+
+  @override
+  String get bookingFailed => 'Booking failed. Please try again.';
+
+  @override
+  String get bookingConfirmed => 'Booking Confirmed';
+
+  @override
+  String get byClickingContinueButton =>
+      'By Clicking continue button you agree to our ';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong. Please try again.';
+
+  @override
+  String get or => 'OR';
+
+  @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get continueWithApple => 'Continue with Apple';
+
+  @override
+  String get invalidPhoneNumberOrCountryCode =>
+      'invalid phone number or country code';
+
+  @override
+  String get pleaseEnterAValidOtp => 'Please enter a valid OTP';
+
+  @override
+  String get enterOtp => 'Enter OTP';
+
+  @override
+  String get otpHasBeenSentTo => 'OTP has been sent to ';
+
+  @override
+  String get didntReceiveTheCode => 'Didn\'t receive the code? ';
+
+  @override
+  String get otpHasBeenResentTo => 'OTP has been resent to ';
+
+  @override
+  String get resendOtp => 'Resend OTP';
+
+  @override
+  String get resendIn => 'Resend in ';
+
+  @override
+  String get verify => 'Verify';
+
+  @override
+  String get exitApp => 'Exit App';
+
+  @override
+  String get exitAppConfirm => 'Do you really want to exit the app?';
+
+  @override
+  String get exit => 'Exit';
 }

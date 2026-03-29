@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:premium_force_main/l10n/app_localizations.dart';
 
 class Bookingcard extends StatelessWidget {
@@ -10,8 +11,16 @@ class Bookingcard extends StatelessWidget {
   final String time;
   final String ride;
   final String brand;
+  final int passengers;
+  final bool isFromReviewAndConfirm;
+  final bool isChauffeur;
+
   const Bookingcard({
     super.key,
+    this.passengers = 1,
+    this.isFromReviewAndConfirm = false,
+    this.isChauffeur = false,
+
     required this.status,
     required this.type,
     required this.pickup,
@@ -22,6 +31,18 @@ class Bookingcard extends StatelessWidget {
     required this.brand,
   });
 
+  static String formatTime(BuildContext context, DateTime? dateTime) {
+    if (dateTime == null) return 'N/A';
+    final locale = Localizations.localeOf(context).languageCode;
+    return '${DateFormat('hh:mm', 'en').format(dateTime)} ${DateFormat('a', locale).format(dateTime)}';
+  }
+
+  static String formatDate(BuildContext context, DateTime? dateTime) {
+    if (dateTime == null) return 'N/A';
+    final locale = Localizations.localeOf(context).languageCode;
+    return DateFormat('dd MMM yyyy', locale).format(dateTime);
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -29,7 +50,9 @@ class Bookingcard extends StatelessWidget {
       padding: EdgeInsets.all(1),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF60350F), Color(0xFFE4A46B), Color(0xFF60350F)],
+          colors: isFromReviewAndConfirm
+              ? [Colors.grey.shade800, Colors.grey.shade700]
+              : [Color(0xFF60350F), Color(0xFFE4A46B), Color(0xFF60350F)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -48,17 +71,49 @@ class Bookingcard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  type,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-                buildContainerText(true, false, loc),
+                isFromReviewAndConfirm
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            loc.service,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            type,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Text(
+                        type,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                !isFromReviewAndConfirm
+                    ? buildContainerText(true, false, loc)
+                    : SizedBox.shrink(),
               ],
             ),
+
+            isFromReviewAndConfirm
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [Divider(color: Colors.grey.shade700, height: 5)],
+                  )
+                : SizedBox.shrink(),
 
             Row(
               children: [
@@ -82,37 +137,45 @@ class Bookingcard extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: 4),
-                Image.asset(
-                  "assets/icons/pixel_arrow.png",
-                  height: 30,
-                  width: 30,
-                  fit: BoxFit.contain,
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      buildContainerText(false, true, loc),
-                      SizedBox(height: 8),
-                      Text(
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        dropoff,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                isChauffeur ? SizedBox.shrink() : SizedBox(width: 4),
+                isChauffeur
+                    ? SizedBox.shrink()
+                    : Transform.flip(
+                        flipX: Directionality.of(context) == TextDirection.rtl,
+                        child: Image.asset(
+                          "assets/icons/pixel_arrow.png",
+                          height: 30,
+                          width: 30,
+                          fit: BoxFit.contain,
                         ),
                       ),
-                    ],
-                  ),
-                ),
+                isChauffeur ? SizedBox.shrink() : SizedBox(width: 8),
+                isChauffeur
+                    ? SizedBox.shrink()
+                    : Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            buildContainerText(false, true, loc),
+                            SizedBox(height: 8),
+                            Text(
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              dropoff,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
               ],
             ),
-            Divider(color: Colors.white),
+
+            !isFromReviewAndConfirm ? Divider(color: Colors.white) : SizedBox(),
 
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -173,7 +236,7 @@ class Bookingcard extends StatelessWidget {
                       ),
                       SizedBox(width: 5),
                       Text(
-                        "$ride - $brand",
+                        "$ride",
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -185,6 +248,36 @@ class Bookingcard extends StatelessWidget {
                 ],
               ),
             ),
+            Column(
+              children: [
+                Divider(color: Colors.grey.shade700, height: 5),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      isFromReviewAndConfirm ? loc.passengers : loc.chauffeur,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+
+                    Text(
+                      isFromReviewAndConfirm ? "$passengers" : loc.notAssigned,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+              ],
+            ),
           ],
         ),
       ),
@@ -195,7 +288,7 @@ class Bookingcard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: isGrey ? Colors.grey : getColorByStatus(status),
+        color: isGrey ? Colors.grey.shade800 : getColorByStatus(status),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
@@ -214,46 +307,30 @@ class Bookingcard extends StatelessWidget {
   }
 
   String getStatusText(String status, AppLocalizations loc) {
-    switch (status) {
-      case "Completed":
-      case "C":
-      case "c":
-        return loc.completed;
-      case "Pending":
-      case "P":
-      case "p":
-        return loc.pending;
-      case "Cancelled":
-      case "X":
-      case "x":
-        return loc.cancelled;
-      case "q":
-      case "Q":
-        return loc.pickup;
-      case "w":
-      case "W":
-        return loc.dropoff;
-      default:
-        return loc.unknown;
+    status = status.toLowerCase();
+    if (status == "completed" || status == "c") {
+      return loc.completed;
+    } else if (status == "pending" || status == "p") {
+      return loc.pending;
+    } else if (status == "cancelled" || status == "x") {
+      return loc.cancelled;
+    } else if (status == "q") {
+      return loc.pickup;
+    } else if (status == "w") {
+      return loc.dropoff;
     }
+    return loc.unknown;
   }
 
   Color getColorByStatus(String status) {
-    switch (status) {
-      case "Completed":
-      case "C":
-      case "c":
-        return Colors.green;
-      case "Pending":
-      case "P":
-      case "p":
-        return Colors.orange;
-      case "Cancelled":
-      case "X":
-      case "x":
-        return Colors.red;
-      default:
-        return Colors.grey;
+    status = status.toLowerCase();
+    if (status == "completed" || status == "c") {
+      return Colors.green;
+    } else if (status == "pending" || status == "p") {
+      return Colors.orange;
+    } else if (status == "cancelled" || status == "x") {
+      return Colors.red;
     }
+    return Colors.grey;
   }
 }

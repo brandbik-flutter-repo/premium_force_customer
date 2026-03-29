@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:pinput/pinput.dart';
-import 'package:premium_force_main/bloc/auth/auth_bloc.dart';
-import 'package:premium_force_main/bloc/auth/auth_event.dart';
-import 'package:premium_force_main/bloc/auth/auth_state.dart';
+import 'package:premium_force_main/providers/auth_provider.dart';
 import 'package:premium_force_main/common_widgets/button.dart';
 import 'package:premium_force_main/common_widgets/snackbar.dart';
 import 'package:premium_force_main/authentication/signup.dart';
+import 'package:premium_force_main/home/home.dart';
 import 'package:premium_force_main/utils/smooth_navigation.dart';
+import 'package:premium_force_main/l10n/app_localizations.dart';
 
 class OTPVerificationPage extends StatefulWidget {
   final String countryCode;
@@ -26,6 +26,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
   final TextEditingController _otpController = TextEditingController();
   final FocusNode _otpFocusNode = FocusNode();
   OverlayEntry? _overlayEntry;
+  bool _isVerifying = false;
 
   @override
   void dispose() {
@@ -70,6 +71,49 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
     return '$m:$s';
   }
 
+  /// Handle OTP verification and navigate based on result.
+  Future<void> _handleVerify() async {
+    if (_otpController.text.length != 6) {
+      _showCustomSnackBar(AppLocalizations.of(context)!.pleaseEnterAValidOtp);
+      return;
+    }
+
+    setState(() => _isVerifying = true);
+
+    final authProvider = context.read<AuthProvider>();
+    await authProvider.verifyOtp(
+      otp: _otpController.text,
+      countryCode: widget.countryCode,
+      phoneNumber: widget.phoneNumber,
+    );
+
+    if (!mounted) return;
+    setState(() => _isVerifying = false);
+
+    if (authProvider.status == AuthStatus.authenticated) {
+      // ── Existing user → go straight to Home ──
+      debugPrint('✅ Existing user — navigating to Home');
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => Home()),
+        (route) => false,
+      );
+    } else if (authProvider.status == AuthStatus.otpVerified) {
+      // ── New user → go to SignUp ──
+      debugPrint('🆕 New user — navigating to SignUp');
+      Navigator.of(context).push(
+        SmoothNavigation.route(
+          SignUpPage(
+            countryCode: widget.countryCode,
+            phoneNumber: widget.phoneNumber,
+          ),
+        ),
+      );
+    } else if (authProvider.status == AuthStatus.failure &&
+        authProvider.errorMessage != null) {
+      _showCustomSnackBar(authProvider.errorMessage!);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     PreferredSizeWidget buidAppBar() {
@@ -86,7 +130,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
           child: AppBar(
             centerTitle: true,
             title: Text(
-              "Enter OTP",
+              AppLocalizations.of(context)!.enterOtp,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
@@ -121,167 +165,153 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
       ),
     );
 
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state.status == AuthStatus.otpVerified) {
-          Navigator.of(context).push(
-            SmoothNavigation.route(
-              SignUpPage(
-                countryCode: widget.countryCode,
-                phoneNumber: widget.phoneNumber,
-              ),
-            ),
-          );
-        } else if (state.status == AuthStatus.failure &&
-            state.errorMessage != null) {
-          _showCustomSnackBar(state.errorMessage!);
-        }
-      },
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF1E1105),
-              Color(0xFF1E1105),
-              Color.fromARGB(255, 26, 23, 23),
-              Color.fromARGB(255, 26, 23, 23),
-            ],
-          ),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF1E1105),
+            Color(0xFF1E1105),
+            Color.fromARGB(255, 26, 23, 23),
+            Color.fromARGB(255, 26, 23, 23),
+          ],
         ),
-        child: Scaffold(
-          resizeToAvoidBottomInset: true,
-          backgroundColor: Colors.transparent,
-          appBar: buidAppBar(),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(height: 50),
+      ),
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        backgroundColor: Colors.transparent,
+        appBar: buidAppBar(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 50),
 
-                // Title
-                RichText(
-                  text: TextSpan(
+              // Title
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: AppLocalizations.of(context)!.otpHasBeenSentTo,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '${widget.countryCode} ${widget.phoneNumber}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 40),
+
+              // OTP Input Fields
+              Pinput(
+                length: 6,
+                controller: _otpController,
+                focusNode: _otpFocusNode,
+                defaultPinTheme: defaultPinTheme,
+                obscureText: true,
+                obscuringCharacter: '*',
+                separatorBuilder: (index) => const SizedBox(width: 8),
+                focusedPinTheme: defaultPinTheme.copyWith(
+                  decoration: defaultPinTheme.decoration!.copyWith(
+                    border: Border.all(color: const Color(0xFFD4A574)),
+                  ),
+                ),
+                onCompleted: (pin) {
+                  debugPrint('OTP Completed: $pin');
+                },
+              ),
+
+              const SizedBox(height: 24),
+
+              // ── Resend OTP row ──────────────────────────────────
+              Consumer<AuthProvider>(
+                builder: (context, authProvider, child) {
+                  final canResend = authProvider.resendCountdown == 0;
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextSpan(
-                        text: 'OTP has been sent to ',
+                      Text(
+                        AppLocalizations.of(context)!.didntReceiveTheCode,
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
+                          fontSize: 14,
+                          color: Colors.white.withAlpha(180),
                         ),
                       ),
-                      TextSpan(
-                        text: '${widget.countryCode} ${widget.phoneNumber}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                      GestureDetector(
+                        onTap: canResend
+                            ? () async {
+                                final authProvider = context
+                                    .read<AuthProvider>();
+                                final success = await authProvider
+                                    .requestOtpResend(
+                                      countryCode: widget.countryCode,
+                                      phoneNumber: widget.phoneNumber,
+                                    );
+
+                                if (mounted) {
+                                  if (success) {
+                                    _showCustomSnackBar(
+                                      "${AppLocalizations.of(context)!.otpHasBeenResentTo}${widget.countryCode} ${widget.phoneNumber}",
+                                    );
+                                  } else {
+                                    final error = authProvider.errorMessage;
+                                    final message =
+                                        error ==
+                                            "invalid phone number or country code"
+                                        ? AppLocalizations.of(
+                                            context,
+                                          )!.invalidPhoneNumberOrCountryCode
+                                        : (error ??
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.somethingWentWrong);
+                                    _showCustomSnackBar(message);
+                                  }
+                                }
+                              }
+                            : null,
+                        child: Text(
+                          canResend
+                              ? AppLocalizations.of(context)!.resendOtp
+                              : '${AppLocalizations.of(context)!.resendIn}${_formatCountdown(authProvider.resendCountdown)}',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: canResend
+                                ? const Color(0xFFD4A574)
+                                : Colors.white.withAlpha(100),
+                          ),
                         ),
                       ),
                     ],
-                  ),
-                ),
+                  );
+                },
+              ),
 
-                const SizedBox(height: 40),
+              const SizedBox(height: 56),
 
-                // OTP Input Fields
-                Pinput(
-                  length: 6,
-                  controller: _otpController,
-                  focusNode: _otpFocusNode,
-                  defaultPinTheme: defaultPinTheme,
-                  obscureText: true,
-                  obscuringCharacter: '*',
-                  separatorBuilder: (index) => const SizedBox(width: 8),
-                  focusedPinTheme: defaultPinTheme.copyWith(
-                    decoration: defaultPinTheme.decoration!.copyWith(
-                      border: Border.all(color: const Color(0xFFD4A574)),
-                    ),
-                  ),
-                  onCompleted: (pin) {
-                    debugPrint('OTP Completed: $pin');
-                  },
-                ),
-
-                const SizedBox(height: 24),
-
-                // ── Resend OTP row ──────────────────────────────────
-                BlocBuilder<AuthBloc, AuthState>(
-                  buildWhen: (prev, curr) =>
-                      prev.resendCountdown != curr.resendCountdown,
-                  builder: (context, state) {
-                    final canResend = state.resendCountdown == 0;
-
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Didn't receive the code? ",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white.withAlpha(180),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: canResend
-                              ? () {
-                                  context.read<AuthBloc>().add(
-                                    AuthOtpResendRequested(
-                                      countryCode: widget.countryCode,
-                                      phoneNumber: widget.phoneNumber,
-                                    ),
-                                  );
-                                  _showCustomSnackBar(
-                                    "OTP has been resent to ${widget.countryCode} ${widget.phoneNumber}",
-                                  );
-                                }
-                              : null,
-                          child: Text(
-                            canResend
-                                ? 'Resend OTP'
-                                : 'Resend in ${_formatCountdown(state.resendCountdown)}',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: canResend
-                                  ? const Color(0xFFD4A574)
-                                  : Colors.white.withAlpha(100),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-
-                const SizedBox(height: 56),
-
-                // Verify Button
-                PremiumButton(
-                  showLoader: false,
-                  fontsize: 18,
-                  text: "Verify",
-                  onTap: () {
-                    if (_otpController.text.length != 6) {
-                      _showCustomSnackBar("Please enter a valid OTP");
-                      return;
-                    }
-                    String otp = _otpController.text;
-                    debugPrint('OTP Entered: $otp');
-                    context.read<AuthBloc>().add(
-                      AuthOtpVerified(
-                        otp: otp,
-                        countryCode: widget.countryCode,
-                        phoneNumber: widget.phoneNumber,
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
+              // Verify Button
+              PremiumButton(
+                showLoader: _isVerifying,
+                fontsize: 18,
+                text: AppLocalizations.of(context)!.verify,
+                onTap: _isVerifying ? () {} : _handleVerify,
+              ),
+            ],
           ),
         ),
       ),

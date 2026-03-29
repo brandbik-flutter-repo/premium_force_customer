@@ -158,11 +158,77 @@ abstract class AppLocalizations {
   /// **'Bookings'**
   String get bookings;
 
+  /// No description provided for @newBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'New Booking'**
+  String get newBooking;
+
   /// No description provided for @recentBookings.
   ///
   /// In en, this message translates to:
   /// **'Recent Bookings'**
   String get recentBookings;
+
+  /// No description provided for @bookingInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Info'**
+  String get bookingInfo;
+
+  /// No description provided for @bookingCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Category'**
+  String get bookingCategory;
+
+  /// No description provided for @brand.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand'**
+  String get brand;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// No description provided for @duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get duration;
+
+  /// No description provided for @from.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get from;
+
+  /// No description provided for @to.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get to;
+
+  /// No description provided for @pricing.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing'**
+  String get pricing;
+
+  /// No description provided for @paymentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Status'**
+  String get paymentStatus;
 
   /// No description provided for @premiumFleet.
   ///
@@ -188,11 +254,47 @@ abstract class AppLocalizations {
   /// **'Airport Departure'**
   String get airportDeparture;
 
+  /// No description provided for @goToBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to booking'**
+  String get goToBooking;
+
+  /// No description provided for @backToHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to home'**
+  String get backToHome;
+
   /// No description provided for @chauffeurService.
   ///
   /// In en, this message translates to:
   /// **'Chauffeur Service'**
   String get chauffeurService;
+
+  /// No description provided for @serviceDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Duration'**
+  String get serviceDuration;
+
+  /// No description provided for @baseChauffeurChargeHourly.
+  ///
+  /// In en, this message translates to:
+  /// **'Base Chauffeur Charge (Hourly)'**
+  String get baseChauffeurChargeHourly;
+
+  /// No description provided for @baseChauffeurCharge8Hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Base Chauffeur Charge (8 Hours)'**
+  String get baseChauffeurCharge8Hours;
+
+  /// No description provided for @baseChauffeurCharge12Hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Base Chauffeur Charge (12 Hours)'**
+  String get baseChauffeurCharge12Hours;
 
   /// No description provided for @luxury.
   ///
@@ -205,6 +307,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'City'**
   String get city;
+
+  /// No description provided for @airport.
+  ///
+  /// In en, this message translates to:
+  /// **'Airport'**
+  String get airport;
+
+  /// No description provided for @terminal.
+  ///
+  /// In en, this message translates to:
+  /// **'Terminal'**
+  String get terminal;
+
+  /// No description provided for @riyadh.
+  ///
+  /// In en, this message translates to:
+  /// **'Riyadh'**
+  String get riyadh;
+
+  /// No description provided for @jeddah.
+  ///
+  /// In en, this message translates to:
+  /// **'Jeddah'**
+  String get jeddah;
+
+  /// No description provided for @dammam.
+  ///
+  /// In en, this message translates to:
+  /// **'Dammam'**
+  String get dammam;
 
   /// No description provided for @business.
   ///
@@ -223,6 +355,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'SUV'**
   String get suv;
+
+  /// No description provided for @yourJourneyIsSecuredWeLlNotifyYouOnceYourChauffeurIsAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Your journey is secured. We’ll notify you once your chauffeur is assigned.'**
+  String get yourJourneyIsSecuredWeLlNotifyYouOnceYourChauffeurIsAssigned;
 
   /// No description provided for @convertible.
   ///
@@ -386,17 +524,35 @@ abstract class AppLocalizations {
   /// **'Location'**
   String get location;
 
-  /// No description provided for @specialId.
+  /// No description provided for @promoCode.
   ///
   /// In en, this message translates to:
-  /// **'Special ID'**
-  String get specialId;
+  /// **'Promo Code'**
+  String get promoCode;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
 
   /// No description provided for @phoneNumber.
   ///
   /// In en, this message translates to:
   /// **'Phone Number'**
   String get phoneNumber;
+
+  /// No description provided for @pleaseEnterYourPromoCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your promo code'**
+  String get pleaseEnterYourPromoCode;
+
+  /// No description provided for @enterYourPromoCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your promo code'**
+  String get enterYourPromoCode;
 
   /// No description provided for @submit.
   ///
@@ -494,6 +650,24 @@ abstract class AppLocalizations {
   /// **'Enter Special ID if available'**
   String get enterSpecialIdIFAvailable;
 
+  /// No description provided for @enterYourSpecialId.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your special ID'**
+  String get enterYourSpecialId;
+
+  /// No description provided for @pleaseEnterYourSpecialId.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your special ID'**
+  String get pleaseEnterYourSpecialId;
+
+  /// No description provided for @iAmACorporateEmployee.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you a corporate employee?'**
+  String get iAmACorporateEmployee;
+
   /// No description provided for @createAccount.
   ///
   /// In en, this message translates to:
@@ -559,6 +733,744 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please agree to the terms and conditions and privacy policy.'**
   String get pleaseAgreeToTheTermsAndConditionsAndPrivacyPolicy;
+
+  /// No description provided for @tripInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip Info'**
+  String get tripInfo;
+
+  /// No description provided for @preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get preferences;
+
+  /// No description provided for @serviceType.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Type'**
+  String get serviceType;
+
+  /// No description provided for @tellUsAboutYourJourney.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell Us About Your Journey'**
+  String get tellUsAboutYourJourney;
+
+  /// No description provided for @enterFlightNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Flight Number'**
+  String get enterFlightNumber;
+
+  /// No description provided for @flightNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight Number'**
+  String get flightNumber;
+
+  /// No description provided for @arrivalDateAndTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrival Date and Time'**
+  String get arrivalDateAndTime;
+
+  /// No description provided for @departureDateAndTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Departure Date and Time'**
+  String get departureDateAndTime;
+
+  /// No description provided for @pickupDateAndTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup Date and Time'**
+  String get pickupDateAndTime;
+
+  /// No description provided for @pickupLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup Location'**
+  String get pickupLocation;
+
+  /// No description provided for @dropLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop Location'**
+  String get dropLocation;
+
+  /// No description provided for @tapToSelectAPickupLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to select a pickup location'**
+  String get tapToSelectAPickupLocation;
+
+  /// No description provided for @tapToSelectADropLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to select a drop location'**
+  String get tapToSelectADropLocation;
+
+  /// No description provided for @terminal1.
+  ///
+  /// In en, this message translates to:
+  /// **'Terminal 1'**
+  String get terminal1;
+
+  /// No description provided for @terminal2.
+  ///
+  /// In en, this message translates to:
+  /// **'Terminal 2'**
+  String get terminal2;
+
+  /// No description provided for @terminal3.
+  ///
+  /// In en, this message translates to:
+  /// **'Terminal 3'**
+  String get terminal3;
+
+  /// No description provided for @terminal4.
+  ///
+  /// In en, this message translates to:
+  /// **'Terminal 4'**
+  String get terminal4;
+
+  /// No description provided for @terminal5.
+  ///
+  /// In en, this message translates to:
+  /// **'Terminal 5'**
+  String get terminal5;
+
+  /// No description provided for @hajjTerminal.
+  ///
+  /// In en, this message translates to:
+  /// **'Hajj Terminal'**
+  String get hajjTerminal;
+
+  /// No description provided for @northTerminal.
+  ///
+  /// In en, this message translates to:
+  /// **'North Terminal'**
+  String get northTerminal;
+
+  /// No description provided for @southTerminal.
+  ///
+  /// In en, this message translates to:
+  /// **'South Terminal'**
+  String get southTerminal;
+
+  /// No description provided for @passengerTerminal.
+  ///
+  /// In en, this message translates to:
+  /// **'Passenger Terminal'**
+  String get passengerTerminal;
+
+  /// No description provided for @aramcoTerminal.
+  ///
+  /// In en, this message translates to:
+  /// **'Aramco Terminal'**
+  String get aramcoTerminal;
+
+  /// No description provided for @royalTerminal.
+  ///
+  /// In en, this message translates to:
+  /// **'Royal Terminal'**
+  String get royalTerminal;
+
+  /// No description provided for @flightNumberIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight number is required'**
+  String get flightNumberIsRequired;
+
+  /// No description provided for @pickupLocationIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup location is required'**
+  String get pickupLocationIsRequired;
+
+  /// No description provided for @dropLocationIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop location is required'**
+  String get dropLocationIsRequired;
+
+  /// No description provided for @kingKhalidInternationalAirport.
+  ///
+  /// In en, this message translates to:
+  /// **'King Khalid International Airport'**
+  String get kingKhalidInternationalAirport;
+
+  /// No description provided for @kingFahadInternationalAirport.
+  ///
+  /// In en, this message translates to:
+  /// **'King Fahad International Airport'**
+  String get kingFahadInternationalAirport;
+
+  /// No description provided for @kingAbdulazizInternationalAirport.
+  ///
+  /// In en, this message translates to:
+  /// **'King Abdulaziz International Airport'**
+  String get kingAbdulazizInternationalAirport;
+
+  /// No description provided for @pickupDateAndTimeIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup date and time are required'**
+  String get pickupDateAndTimeIsRequired;
+
+  /// No description provided for @dateAndTimeIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Date and time are required'**
+  String get dateAndTimeIsRequired;
+
+  /// No description provided for @previouslySelectedTimeClearedAsItIsInThePast.
+  ///
+  /// In en, this message translates to:
+  /// **'Previously selected time cleared as it is in the past'**
+  String get previouslySelectedTimeClearedAsItIsInThePast;
+
+  /// No description provided for @selectDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Date'**
+  String get selectDate;
+
+  /// No description provided for @pleaseSelectADateFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a date first'**
+  String get pleaseSelectADateFirst;
+
+  /// No description provided for @selectTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Time'**
+  String get selectTime;
+
+  /// No description provided for @cannotSelectPastTimeForToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot select past time for today'**
+  String get cannotSelectPastTimeForToday;
+
+  /// No description provided for @chooseYouPreferredVehicle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose you preferred vehicle'**
+  String get chooseYouPreferredVehicle;
+
+  /// No description provided for @chauffeurredClass.
+  ///
+  /// In en, this message translates to:
+  /// **'Chauffeurred Class'**
+  String get chauffeurredClass;
+
+  /// No description provided for @preferredModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred Model'**
+  String get preferredModel;
+
+  /// No description provided for @choosePreferredBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Preferred Brand'**
+  String get choosePreferredBrand;
+
+  /// No description provided for @specialRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Special Requests'**
+  String get specialRequests;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @luxurySedan.
+  ///
+  /// In en, this message translates to:
+  /// **'Luxury Sedan'**
+  String get luxurySedan;
+
+  /// No description provided for @luxurySuv.
+  ///
+  /// In en, this message translates to:
+  /// **'Luxury SUV'**
+  String get luxurySuv;
+
+  /// No description provided for @luxuryCoupe.
+  ///
+  /// In en, this message translates to:
+  /// **'Luxury Coupe'**
+  String get luxuryCoupe;
+
+  /// No description provided for @luxurySports.
+  ///
+  /// In en, this message translates to:
+  /// **'Luxury Sports'**
+  String get luxurySports;
+
+  /// No description provided for @luxuryConvertible.
+  ///
+  /// In en, this message translates to:
+  /// **'Luxury Convertible'**
+  String get luxuryConvertible;
+
+  /// No description provided for @model1.
+  ///
+  /// In en, this message translates to:
+  /// **'Model 1'**
+  String get model1;
+
+  /// No description provided for @model2.
+  ///
+  /// In en, this message translates to:
+  /// **'Model 2'**
+  String get model2;
+
+  /// No description provided for @model3.
+  ///
+  /// In en, this message translates to:
+  /// **'Model 3'**
+  String get model3;
+
+  /// No description provided for @providePassengerInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Provide Passenger Info'**
+  String get providePassengerInfo;
+
+  /// No description provided for @numberOfPassengers.
+  ///
+  /// In en, this message translates to:
+  /// **'No. of Passengers'**
+  String get numberOfPassengers;
+
+  /// No description provided for @passengerNameAtleastOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Passenger Name (Atleast one separated by commas)'**
+  String get passengerNameAtleastOne;
+
+  /// No description provided for @passengerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Passenger Name'**
+  String get passengerName;
+
+  /// No description provided for @pleaseEnterAtleastOnepassengerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter atleast one passenger name'**
+  String get pleaseEnterAtleastOnepassengerName;
+
+  /// No description provided for @pleaseEnterAMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a mobile number'**
+  String get pleaseEnterAMobileNumber;
+
+  /// No description provided for @pleaseEnterAPassengerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a passenger name'**
+  String get pleaseEnterAPassengerName;
+
+  /// No description provided for @reviewAndConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Review and Confirm'**
+  String get reviewAndConfirm;
+
+  /// No description provided for @reviewAndConfirmYourRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Review and Confirm Your Request'**
+  String get reviewAndConfirmYourRequest;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @service.
+  ///
+  /// In en, this message translates to:
+  /// **'Service'**
+  String get service;
+
+  /// No description provided for @passengers.
+  ///
+  /// In en, this message translates to:
+  /// **'Passengers'**
+  String get passengers;
+
+  /// No description provided for @notAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Assigned'**
+  String get notAssigned;
+
+  /// No description provided for @chauffeur.
+  ///
+  /// In en, this message translates to:
+  /// **'Chauffeur'**
+  String get chauffeur;
+
+  /// No description provided for @totalDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Distance'**
+  String get totalDistance;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @vat.
+  ///
+  /// In en, this message translates to:
+  /// **'VAT (15%)'**
+  String get vat;
+
+  /// No description provided for @paymentSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Summary'**
+  String get paymentSummary;
+
+  /// No description provided for @km.
+  ///
+  /// In en, this message translates to:
+  /// **'KM'**
+  String get km;
+
+  /// No description provided for @charge.
+  ///
+  /// In en, this message translates to:
+  /// **'Charge'**
+  String get charge;
+
+  /// No description provided for @noCarsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No cars available'**
+  String get noCarsAvailable;
+
+  /// No description provided for @bookService.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Service'**
+  String get bookService;
+
+  /// No description provided for @logoutConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out?'**
+  String get logoutConfirm;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @remove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get remove;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @loginAgainMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You will have to login again next time you open the app.'**
+  String get loginAgainMessage;
+
+  /// No description provided for @deleteAccountConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get deleteAccountConfirm;
+
+  /// No description provided for @deleteAccountMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone and all your data will be cleared.'**
+  String get deleteAccountMessage;
+
+  /// No description provided for @pickupTimeCannotBeAfterDepartureTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup time cannot be after departure time'**
+  String get pickupTimeCannotBeAfterDepartureTime;
+
+  /// No description provided for @pickupTimeAtLeast4HoursBeforeDeparture.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup time must be at least 4 hours before departure time'**
+  String get pickupTimeAtLeast4HoursBeforeDeparture;
+
+  /// No description provided for @noRecentBookings.
+  ///
+  /// In en, this message translates to:
+  /// **'No recent bookings'**
+  String get noRecentBookings;
+
+  /// No description provided for @noUpcomingBookings.
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming bookings'**
+  String get noUpcomingBookings;
+
+  /// No description provided for @noOngoingBookings.
+  ///
+  /// In en, this message translates to:
+  /// **'No ongoing bookings'**
+  String get noOngoingBookings;
+
+  /// No description provided for @noCompletedBookings.
+  ///
+  /// In en, this message translates to:
+  /// **'No completed bookings'**
+  String get noCompletedBookings;
+
+  /// No description provided for @noCancelledBookings.
+  ///
+  /// In en, this message translates to:
+  /// **'No cancelled bookings'**
+  String get noCancelledBookings;
+
+  /// No description provided for @onceYouBookItWillAppearHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Once you book a service, it will appear here.'**
+  String get onceYouBookItWillAppearHere;
+
+  /// No description provided for @termsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'These terms and conditions outline the rules and regulations for the use of the Premium Force application, a luxury chauffeur booking service operating in the Kingdom of Saudi Arabia.\n\nBy accessing this app, we assume you accept these terms and conditions. Do not continue to use Premium Force if you do not agree to take all of the terms and conditions stated on this page.\n'**
+  String get termsIntro;
+
+  /// No description provided for @termsSection1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'1. App Services & Bookings'**
+  String get termsSection1Title;
+
+  /// No description provided for @termsSection1Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium Force connects users with luxury chauffeur services within Saudi Arabia. All bookings are subject to availability, and we reserve the right to decline or cancel bookings under specific circumstances outlined in our policies.'**
+  String get termsSection1Content;
+
+  /// No description provided for @termsSection2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'2. User Responsibilities'**
+  String get termsSection2Title;
+
+  /// No description provided for @termsSection2Content.
+  ///
+  /// In en, this message translates to:
+  /// **'You are specifically restricted from all of the following:\n• using this app in any way that impacts user access or disrupts the chauffeur services;\n• using this app contrary to the applicable laws and regulations of the Kingdom of Saudi Arabia;\n• behaving inappropriately towards our chauffeurs or damaging the provided luxury vehicles.'**
+  String get termsSection2Content;
+
+  /// No description provided for @termsSection3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'3. Payments & Cancellations'**
+  String get termsSection3Title;
+
+  /// No description provided for @termsSection3Content.
+  ///
+  /// In en, this message translates to:
+  /// **'All payments for chauffeur services must be made through the approved methods within the app. Cancellation policies apply to all bookings. Late cancellations or no-shows may incur charges as detailed during the booking process.'**
+  String get termsSection3Content;
+
+  /// No description provided for @termsSection4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'4. Privacy'**
+  String get termsSection4Title;
+
+  /// No description provided for @termsSection4Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Please read our Privacy Policy. Your use of the Application signifies your continuing consent to our Privacy Policy regarding the collection and use of your personal and location data necessary for the chauffeur service.'**
+  String get termsSection4Content;
+
+  /// No description provided for @termsSection5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'5. Disclaimer of Warranties'**
+  String get termsSection5Title;
+
+  /// No description provided for @termsSection5Content.
+  ///
+  /// In en, this message translates to:
+  /// **'This app is provided \"as is,\" and Premium Force expresses no representations or warranties related to the continuous availability of the app or specific chauffeurs.'**
+  String get termsSection5Content;
+
+  /// No description provided for @termsSection6Title.
+  ///
+  /// In en, this message translates to:
+  /// **'6. Governing Law & Jurisdiction'**
+  String get termsSection6Title;
+
+  /// No description provided for @termsSection6Content.
+  ///
+  /// In en, this message translates to:
+  /// **'These Terms will be governed by and interpreted in accordance with the laws of the Kingdom of Saudi Arabia, and you submit to the exclusive jurisdiction of the courts located in Saudi Arabia for the resolution of any disputes.'**
+  String get termsSection6Content;
+
+  /// No description provided for @termsSection7Title.
+  ///
+  /// In en, this message translates to:
+  /// **'7. Changes and Amendments'**
+  String get termsSection7Title;
+
+  /// No description provided for @termsSection7Content.
+  ///
+  /// In en, this message translates to:
+  /// **'We reserve the right to modify these terms or policies relating to the app or services at any time. Continued use of the app after any such changes shall constitute your consent to such changes.'**
+  String get termsSection7Content;
+
+  /// No description provided for @bookingConfirmedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking confirmed successfully!'**
+  String get bookingConfirmedSuccessfully;
+
+  /// No description provided for @bookingFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking failed. Please try again.'**
+  String get bookingFailed;
+
+  /// No description provided for @bookingConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Confirmed'**
+  String get bookingConfirmed;
+
+  /// No description provided for @byClickingContinueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'By Clicking continue button you agree to our '**
+  String get byClickingContinueButton;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get somethingWentWrong;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'OR'**
+  String get or;
+
+  /// No description provided for @continueWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get continueWithGoogle;
+
+  /// No description provided for @continueWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get continueWithApple;
+
+  /// No description provided for @invalidPhoneNumberOrCountryCode.
+  ///
+  /// In en, this message translates to:
+  /// **'invalid phone number or country code'**
+  String get invalidPhoneNumberOrCountryCode;
+
+  /// No description provided for @pleaseEnterAValidOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid OTP'**
+  String get pleaseEnterAValidOtp;
+
+  /// No description provided for @enterOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter OTP'**
+  String get enterOtp;
+
+  /// No description provided for @otpHasBeenSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP has been sent to '**
+  String get otpHasBeenSentTo;
+
+  /// No description provided for @didntReceiveTheCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t receive the code? '**
+  String get didntReceiveTheCode;
+
+  /// No description provided for @otpHasBeenResentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP has been resent to '**
+  String get otpHasBeenResentTo;
+
+  /// No description provided for @resendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend OTP'**
+  String get resendOtp;
+
+  /// No description provided for @resendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend in '**
+  String get resendIn;
+
+  /// No description provided for @verify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verify;
+
+  /// No description provided for @exitApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit App'**
+  String get exitApp;
+
+  /// No description provided for @exitAppConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to exit the app?'**
+  String get exitAppConfirm;
+
+  /// No description provided for @exit.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exit;
 }
 
 class _AppLocalizationsDelegate
